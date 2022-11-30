@@ -42,17 +42,15 @@ public class PFDListener implements Listener {
         }
 
         if (permission != null) {
-
-            if (permission.has(player, "pfd.ignore." + worldName) || permission.has(player, "pfd.ignore.*")) {
-                pfdBean.setStatus("ignore");
-            }
-
-            else if (permission.has(player, "pfd.exempt." + worldName) || permission.has(player, "pfd.exempt.*")) {
+            if (player.isOp() ||permission.has(player, "pfd.exempt." + worldName) || permission.has(player, "pfd.exempt.*")) {
                 event.setKeepInventory(true);
                 event.setKeepLevel(true);
                 event.getDrops().clear();
                 event.setDroppedExp(0);
                 pfdBean.setStatus("exempt");
+            }
+            else if (permission.has(player, "pfd.ignore." + worldName) || permission.has(player, "pfd.ignore.*")) {
+                pfdBean.setStatus("ignore");
             }
 
         }
